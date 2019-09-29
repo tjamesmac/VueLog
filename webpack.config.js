@@ -1,12 +1,15 @@
-
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  'entry': 'src/client/vue/index.js',
+  'mode': 'development',
+  'entry': './src/client/vue/index.js',
   'output': {
     'path': __dirname+'/dist',
     'filename': '[name].[chunkhash:8].js',
   },
-  'dev-tools': 'source-map',
+  'devtool': 'source-map',
   'module': {
     'rules': [
       {
@@ -42,4 +45,12 @@ module.exports = {
       },
     ],
   },
+  'plugins': [
+    new VueLoaderPlugin(),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      hash: true,
+      template: './src/client/html/index.html',
+    }),
+  ],
 };
